@@ -5,16 +5,42 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .App {
+  display: flex;
+  flex-direction: column;
 }
 
 .signIn {
-  background-color: aquamarine;
+  background-color: #54b8b5;
   padding: 1%;
 }
 .createList {
-  background-color: blanchedalmond;
+  background-color: #70d0c6;
   padding: 1%;
+}
+button {
+  background-color: #ffc100;
 }
 button:hover {
   cursor: pointer;
+  background-color: #facb62;
+}
+.myLists {
+  width: 90%;
+  background-color: #fff;
+  border: 2px solid #ffc100;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+.list {
+  background-color: #fcdaa5;
+  width: 40%;
+  margin: 5px;
+}
+.listTitle {
+  background-color: #facb62;
+  color: #000;
+  font-size: 1rem;
 }

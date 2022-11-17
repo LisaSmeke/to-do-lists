@@ -16,7 +16,9 @@ function App() {
   };
 
   const getLists = () => {
-    Axios.get('http://localhost:3001/lists').then((response) => console.log(response));
+    Axios.get('http://localhost:3001/lists').then((response) => {
+      setMyLists(response.data);
+    });
   };
 
   return (
@@ -41,6 +43,16 @@ function App() {
         <input type="text" />
         <button onClick={createList}>Create list</button>
         <button onClick={getLists}>Show lists</button>
+        <div className="myLists">
+          {myLists.map((val, key) => {
+            return (
+              <div className="list">
+                <h2 className="listTitle">{val.title}</h2>
+                <p>todo</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
