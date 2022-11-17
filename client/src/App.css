@@ -1,3 +1,12 @@
+:root {
+  --main: #54b8b5;
+  --secondary: #70d0c6;
+  --hl1: #ffc100;
+  --hl2: #facb62;
+  --hl3: #fcdaa5;
+  --light: #fff;
+  --dark: #000d0d;
+}
 * {
   margin: 0;
   padding: 0;
@@ -10,37 +19,39 @@
 }
 
 .signIn {
-  background-color: #54b8b5;
+  background-color: var(--main);
   padding: 1%;
 }
 .createList {
-  background-color: #70d0c6;
+  background-color: var(--secondary);
   padding: 1%;
 }
 button {
-  background-color: #ffc100;
+  background-color: var(--hl1);
+  border: 2px solid var(--dark);
 }
 button:hover {
   cursor: pointer;
-  background-color: #facb62;
+  background-color: transparent;
+  border: 2px solid var(--light);
 }
 .myLists {
   width: 90%;
-  background-color: #fff;
-  border: 2px solid #ffc100;
+  background-color: var(--light);
+  border: 2px solid var(--hl1);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
 }
+.listTitle {
+  background-color: var(--hl1);
+  color: var(--dark);
+  font-size: 1rem;
+}
 .list {
-  background-color: #fcdaa5;
+  background-color: var(--hl3);
   width: 40%;
   margin: 5px;
-}
-.listTitle {
-  background-color: #facb62;
-  color: #000;
-  font-size: 1rem;
 }
