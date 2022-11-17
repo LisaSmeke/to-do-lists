@@ -1,12 +1,16 @@
 import './App.css';
 import { useState } from 'react';
+import Axios from 'axios';
 
 function App() {
-  const [list, setList] = useState('');
+  const [title, setTitle] = useState('');
   const [todo, setTodo] = useState('');
 
-  const displayInfo = () => {
-    console.log(list + todo);
+  const createList = () => {
+    console.log(title);
+    Axios.post('http://localhost:3001/create', { title: title }).then(() =>
+      console.log('Success: New list created'),
+    );
   };
 
   return (
@@ -24,7 +28,7 @@ function App() {
         <input
           type="text"
           onChange={(event) => {
-            setList(event.target.value);
+            setTitle(event.target.value);
           }}
         />
         <label>to-do:</label>
@@ -34,7 +38,7 @@ function App() {
             setTodo(event.target.value);
           }}
         />
-        <button onClick={displayInfo}>Create list</button>
+        <button onClick={createList}>Create list</button>
       </div>
     </div>
   );
