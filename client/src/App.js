@@ -4,13 +4,19 @@ import Axios from 'axios';
 
 function App() {
   const [title, setTitle] = useState('');
-  const [todo, setTodo] = useState('');
+  // const [todo, setTodo] = useState('');
+
+  const [myLists, setMyLists] = useState([]);
 
   const createList = () => {
     console.log(title);
     Axios.post('http://localhost:3001/create', { title: title }).then(() =>
       console.log('Success: New list created'),
     );
+  };
+
+  const getLists = () => {
+    Axios.get('http://localhost:3001/lists').then((response) => console.log(response));
   };
 
   return (
@@ -32,13 +38,9 @@ function App() {
           }}
         />
         <label>to-do:</label>
-        <input
-          type="text"
-          onChange={(event) => {
-            setTodo(event.target.value);
-          }}
-        />
+        <input type="text" />
         <button onClick={createList}>Create list</button>
+        <button onClick={getLists}>Show lists</button>
       </div>
     </div>
   );
