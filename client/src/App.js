@@ -62,6 +62,7 @@ function App() {
     Axios.put('http://localhost:3001/updatetodo', { done: true, id: id }).then((response) => {
       setMyTodos(
         myTodos.map((val) => {
+          console.log('task done');
           return val.id == id ? { id: val.id, done: true } : val;
         }),
       );
@@ -121,20 +122,20 @@ function App() {
                 </div>
 
                 <div className="addTodo">
-                  <button onClick={getTodos}>Show todos</button>
+                  <button onClick={getTodos}>Show all todos</button>
                   {myTodos.map((val, key) => {
                     return (
                       <div>
                         {' '}
                         <p>{val.todo}</p>
                         <p>{val.done}</p>
-                        {/* <button
+                        <button
                           onClick={() => {
                             updateTodo(val.id);
                           }}
                         >
                           Done
-                        </button> */}
+                        </button>
                         <button
                           onClick={() => {
                             deleteTodo(val.id);

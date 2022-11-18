@@ -87,6 +87,17 @@ app.get('/todos', (req, res) => {
   });
 });
 
+//Display done to-dos
+app.get('/donetodos', (req, res) => {
+  db.query('SELECT todo FROM todos WHERE done = 1', (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 //Update a to-do
 app.put('/updatetodo', (req, res) => {
   const id = req.body.id;
