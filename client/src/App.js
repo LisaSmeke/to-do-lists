@@ -6,6 +6,9 @@ function App() {
   const [title, setTitle] = useState('');
   const [newTitle, setNewTitle] = useState('');
   const [myLists, setMyLists] = useState([]);
+  const [todo, setTodo] = useState('');
+  const [newTodo, setNewTodo] = useState('');
+  const [myTodos, setMyTodos] = useState([]);
 
   const createList = () => {
     console.log(title);
@@ -14,9 +17,22 @@ function App() {
     });
   };
 
+  const createTodo = () => {
+    console.log(todo);
+    Axios.post('http://localhost:3001/createtodo', { todo: todo }).then(() => {
+      setMyTodos([...myTodos, { todo: todo }]);
+    });
+  };
+
   const getLists = () => {
     Axios.get('http://localhost:3001/lists').then((response) => {
       setMyLists(response.data);
+    });
+  };
+
+  const getTodos = () => {
+    Axios.get('http://localhost:3001/todos').then((response) => {
+      setMyTodos(response.data);
     });
   };
 
@@ -83,6 +99,24 @@ function App() {
                     Update
                   </button>
                 </div>
+
+                <div className="addTodo">
+                  <input
+                    type="text"
+                    placeholder="todo"
+                    onChange={(event) => {
+                      setTodo(event.target.value);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      createTodo(val.id);
+                    }}
+                  >
+                    Add todo
+                  </button>
+                </div>
+
                 <div className="deleteList">
                   <button
                     onClick={() => {

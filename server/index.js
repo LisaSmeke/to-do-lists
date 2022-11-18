@@ -26,9 +26,33 @@ app.post('/create', (req, res) => {
   });
 });
 
+//Create a to-do
+app.post('/createtodo', (req, res) => {
+  const todo = req.body.todo;
+
+  db.query('INSERT INTO todos (todo) VALUES(?)', [todo], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send('To-do inserted');
+    }
+  });
+});
+
 //Display all lists
 app.get('/lists', (req, res) => {
   db.query('SELECT * FROM lists', (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//Display all todos
+app.get('/todos', (req, res) => {
+  db.query('SELECT * FROM todos', (err, result) => {
     if (err) {
       console.log(err);
     } else {
