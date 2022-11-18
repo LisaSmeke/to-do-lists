@@ -37,17 +37,17 @@ app.get('/lists', (req, res) => {
   });
 });
 
-// app.put('/update', (req, res) => {
-//   const id = req.body.id;
-//   const title = req.body.title;
-//   db.query('UPDATE lists SET title = ? WHERE id = ?', [title, id], (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
+app.put('/update', (req, res) => {
+  const id = req.body.id;
+  const title = req.body.title;
+  db.query('UPDATE lists SET title = ? WHERE id = ?', [title, id], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 app.delete('/delete/:id', (req, res) => {
   const id = req.params.id;

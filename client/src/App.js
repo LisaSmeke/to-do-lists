@@ -3,14 +3,9 @@ import { useState } from 'react';
 import Axios from 'axios';
 
 function App() {
-  // To add title:
   const [title, setTitle] = useState('');
-  // To update title:
   const [newTitle, setNewTitle] = useState('');
-  // const [todo, setTodo] = useState('');
-
   const [myLists, setMyLists] = useState([]);
-  // const [myTodos, setMyTodos] = useState([]);
 
   const createList = () => {
     console.log(title);
@@ -19,21 +14,19 @@ function App() {
     });
   };
 
-  // const createTodo = () => {
-  //   Axios.post('http://localhost:3001/todo', { todo: todo }).then(() =>
-  //     console.log('Success: New todo added'),
-  //   );
-  // };
-
-  // const getTodos = () => {
-  //   Axios.get('http://localhost:3001/todos').then((response) => {
-  //     setMyTodos(response.data);
-  //   });
-  // };
-
   const getLists = () => {
     Axios.get('http://localhost:3001/lists').then((response) => {
       setMyLists(response.data);
+    });
+  };
+
+  const updateListTitle = (id) => {
+    Axios.put('http://localhost:3001/update', { title: newTitle, id: id }).then((response) => {
+      setMyLists(
+        myLists.map((val) => {
+          return val.id == id ? { id: val.id, title: newTitle } : val;
+        }),
+      );
     });
   };
 
@@ -73,6 +66,22 @@ function App() {
               <div className="list">
                 <div className="listTitle">
                   <h2>{val.title}</h2>
+                </div>
+                <div className="updateTitle">
+                  <input
+                    type="text"
+                    placeholder="new title"
+                    onChange={(event) => {
+                      setNewTitle(event.target.value);
+                    }}
+                  />
+                  <button
+                    onClick={() => {
+                      updateListTitle(val.id);
+                    }}
+                  >
+                    Update
+                  </button>
                 </div>
                 <div className="deleteList">
                   <button
