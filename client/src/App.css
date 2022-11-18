@@ -23,7 +23,7 @@
   padding: 1%;
 }
 /*Create a list*/
-.createList {
+.main {
   width: 100%;
   background-color: var(--secondary);
   padding: 2%;
@@ -42,15 +42,21 @@
   justify-content: center;
   align-items: flex-start;
 }
-.listTitle {
-  background-color: var(--hl1);
-  color: var(--dark);
-  font-size: 1rem;
-}
 .list {
   background-color: var(--hl3);
   width: 40%;
   margin: 5px;
+}
+.listTitle {
+  background-color: var(--hl1);
+  color: var(--dark);
+  font-size: 0.8rem;
+}
+.deleteList {
+  background-color: pink;
+}
+.deleteList button {
+  background-color: red;
 }
 
 /*Buttons*/

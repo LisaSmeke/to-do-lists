@@ -3,7 +3,10 @@ import { useState } from 'react';
 import Axios from 'axios';
 
 function App() {
+  // To add title:
   const [title, setTitle] = useState('');
+  // To update title:
+  const [newTitle, setNewTitle] = useState('');
   // const [todo, setTodo] = useState('');
 
   const [myLists, setMyLists] = useState([]);
@@ -11,9 +14,9 @@ function App() {
 
   const createList = () => {
     console.log(title);
-    Axios.post('http://localhost:3001/create', { title: title }).then(() =>
-      console.log('Success: New list created'),
-    );
+    Axios.post('http://localhost:3001/create', { title: title }).then(() => {
+      setMyLists([...myLists, { title: title }]);
+    });
   };
 
   // const createTodo = () => {
@@ -34,6 +37,16 @@ function App() {
     });
   };
 
+  const deleteList = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+      setMyLists(
+        myLists.filter((val) => {
+          return val.id != id;
+        }),
+      );
+    });
+  };
+
   return (
     <div className="App">
       <div className="signIn">
@@ -43,7 +56,7 @@ function App() {
         <input type="password" />
         <button>Sign in</button>
       </div>
-      <div className="createList">
+      <div className="main">
         <h2>My To-do Lists</h2>
         <label>Title:</label>
         <input
@@ -58,7 +71,18 @@ function App() {
           {myLists.map((val, key) => {
             return (
               <div className="list">
-                <h2 className="listTitle">{val.title}</h2>
+                <div className="listTitle">
+                  <h2>{val.title}</h2>
+                </div>
+                <div className="deleteList">
+                  <button
+                    onClick={() => {
+                      deleteList(val.id);
+                    }}
+                  >
+                    Delete list
+                  </button>
+                </div>
               </div>
             );
           })}
