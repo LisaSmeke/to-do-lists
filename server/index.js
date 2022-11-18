@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   database: 'to_do_lists',
 });
 
-//Create a list with a Title
+//Create a list with a title
 app.post('/create', (req, res) => {
   const title = req.body.title;
 
@@ -22,19 +22,6 @@ app.post('/create', (req, res) => {
       console.log(err);
     } else {
       res.send('Value inserted');
-    }
-  });
-});
-
-//Create a to-do
-app.post('/createtodo', (req, res) => {
-  const todo = req.body.todo;
-
-  db.query('INSERT INTO todos (todo) VALUES(?)', [todo], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send('To-do inserted');
     }
   });
 });
@@ -50,17 +37,7 @@ app.get('/lists', (req, res) => {
   });
 });
 
-//Display all todos
-app.get('/todos', (req, res) => {
-  db.query('SELECT * FROM todos', (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
-
+//Update list title
 app.put('/update', (req, res) => {
   const id = req.body.id;
   const title = req.body.title;
@@ -73,6 +50,7 @@ app.put('/update', (req, res) => {
   });
 });
 
+//Delete list
 app.delete('/delete/:id', (req, res) => {
   const id = req.params.id;
   db.query('DELETE FROM lists WHERE id = ?', id, (err, result) => {
@@ -84,6 +62,45 @@ app.delete('/delete/:id', (req, res) => {
   });
 });
 
+//Create a to-do
+app.post('/createtodo', (req, res) => {
+  const todo = req.body.todo;
+  const done = req.body.done;
+
+  db.query('INSERT INTO todos (todo, done) VALUES(?,?)', [todo, done], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send('Todo inserted');
+    }
+  });
+});
+
+//Display all to-dos
+app.get('/todos', (req, res) => {
+  db.query('SELECT * FROM todos', (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//Update a to-do
+app.put('/updatetodo', (req, res) => {
+  const id = req.body.id;
+  const done = req.body.done;
+  db.query('UPDATE todos SET done = ? WHERE id = ?', [done, id], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//Delete a to-do
 app.delete('/deletetodo/:id', (req, res) => {
   const id = req.params.id;
   db.query('DELETE FROM todos WHERE id = ?', id, (err, result) => {
@@ -94,30 +111,5 @@ app.delete('/deletetodo/:id', (req, res) => {
     }
   });
 });
-
-//Create to-do
-// app.post('/todo', (req, res) => {
-//   const id = req.body.id;
-//   const todo = req.body.todo;
-
-//   db.query(`INSERT INTO todos (todo) VALUES(?,?)`, [todo, id], (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.send('To-do inserted');
-//     }
-//   });
-// });
-
-//Display todos
-// app.get('/todos', (req, res) => {
-//   db.query('SELECT * FROM todos', (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
 
 app.listen(3001, () => console.log('Your server is running on port 3001'));

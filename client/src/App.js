@@ -7,9 +7,10 @@ function App() {
   const [newTitle, setNewTitle] = useState('');
   const [myLists, setMyLists] = useState([]);
   const [todo, setTodo] = useState('');
-  const [newTodo, setNewTodo] = useState('');
+  const [done, setDone] = useState(false);
   const [myTodos, setMyTodos] = useState([]);
 
+  /*Lists*/
   const createList = () => {
     console.log(title);
     Axios.post('http://localhost:3001/create', { title: title }).then(() => {
@@ -17,22 +18,9 @@ function App() {
     });
   };
 
-  const createTodo = () => {
-    console.log(todo);
-    Axios.post('http://localhost:3001/createtodo', { todo: todo }).then(() => {
-      setMyTodos([...myTodos, { todo: todo }]);
-    });
-  };
-
   const getLists = () => {
     Axios.get('http://localhost:3001/lists').then((response) => {
       setMyLists(response.data);
-    });
-  };
-
-  const getTodos = () => {
-    Axios.get('http://localhost:3001/todos').then((response) => {
-      setMyTodos(response.data);
     });
   };
 
@@ -51,6 +39,30 @@ function App() {
       setMyLists(
         myLists.filter((val) => {
           return val.id != id;
+        }),
+      );
+    });
+  };
+
+  /*To-dos*/
+  const createTodo = () => {
+    console.log(todo);
+    Axios.post('http://localhost:3001/createtodo', { todo: todo, done: done }).then(() => {
+      setMyTodos([...myTodos, { todo: todo, done: done }]);
+    });
+  };
+
+  const getTodos = () => {
+    Axios.get('http://localhost:3001/todos').then((response) => {
+      setMyTodos(response.data);
+    });
+  };
+
+  const updateTodo = (id) => {
+    Axios.put('http://localhost:3001/updatetodo', { done: true, id: id }).then((response) => {
+      setMyTodos(
+        myTodos.map((val) => {
+          return val.id == id ? { id: val.id, done: true } : val;
         }),
       );
     });
@@ -92,8 +104,6 @@ function App() {
               <div className="list">
                 <div className="listTitle">
                   <h2>{val.title}</h2>
-                </div>
-                <div className="updateTitle">
                   <input
                     type="text"
                     placeholder="new title"
@@ -111,6 +121,33 @@ function App() {
                 </div>
 
                 <div className="addTodo">
+                  <button onClick={getTodos}>Show todos</button>
+                  {myTodos.map((val, key) => {
+                    return (
+                      <div>
+                        {' '}
+                        <p>{val.todo}</p>
+                        <p>{val.done}</p>
+                        {/* <button
+                          onClick={() => {
+                            updateTodo(val.id);
+                          }}
+                        >
+                          Done
+                        </button> */}
+                        <button
+                          onClick={() => {
+                            deleteTodo(val.id);
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div>
                   <input
                     type="text"
                     placeholder="todo"
@@ -125,22 +162,6 @@ function App() {
                   >
                     Add todo
                   </button>
-                  <button onClick={getTodos}>Show todos</button>
-                  {myTodos.map((val, key) => {
-                    return (
-                      <div>
-                        {' '}
-                        <p>{val.todo}</p>
-                        <button
-                          onClick={() => {
-                            deleteTodo(val.id);
-                          }}
-                        >
-                          X
-                        </button>
-                      </div>
-                    );
-                  })}
                 </div>
 
                 <div className="deleteList">
