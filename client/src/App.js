@@ -4,10 +4,10 @@ import Axios from 'axios';
 
 function App() {
   const [title, setTitle] = useState('');
-  const [todo, setTodo] = useState('');
+  // const [todo, setTodo] = useState('');
 
   const [myLists, setMyLists] = useState([]);
-  const [myTodos, setMyTodos] = useState([]);
+  // const [myTodos, setMyTodos] = useState([]);
 
   const createList = () => {
     console.log(title);
