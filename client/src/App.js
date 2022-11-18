@@ -90,15 +90,19 @@ function App() {
       </div>
       <div className="main">
         <h2>My To-do Lists</h2>
-        <label>Title:</label>
+        <label>New list:</label>
         <input
           type="text"
+          placeholder="List title"
           onChange={(event) => {
             setTitle(event.target.value);
           }}
-        />
-        <button onClick={createList}>Create list</button>
-        <button onClick={getLists}>Show lists</button>
+          required
+        ></input>
+        <button type="submit" onClick={createList}>
+          Create
+        </button>
+        <button onClick={getLists}>Show all</button>
         <div className="myLists">
           {myLists.map((val, key) => {
             return (
@@ -106,43 +110,51 @@ function App() {
                 <div className="listTitle">
                   <h2>{val.title}</h2>
                   <input
+                    className="newTitleInput"
                     type="text"
-                    placeholder="new title"
+                    placeholder="Update list title"
                     onChange={(event) => {
                       setNewTitle(event.target.value);
                     }}
                   />
                   <button
+                    className="renameBtn"
                     onClick={() => {
                       updateListTitle(val.id);
                     }}
                   >
-                    Update
+                    Rename
                   </button>
                 </div>
 
                 <div className="addTodo">
-                  <button onClick={getTodos}>Show all todos</button>
+                  <button className="allTodosBtn" onClick={getTodos}>
+                    All to-dos
+                  </button>
                   {myTodos.map((val, key) => {
                     return (
-                      <div>
+                      <div className="todo">
                         {' '}
                         <p>{val.todo}</p>
-                        <p>{val.done}</p>
-                        <button
-                          onClick={() => {
-                            updateTodo(val.id);
-                          }}
-                        >
-                          Done
-                        </button>
-                        <button
-                          onClick={() => {
-                            deleteTodo(val.id);
-                          }}
-                        >
-                          X
-                        </button>
+                        {/* <p>{val.done}</p> */}
+                        <div className="todoBtns">
+                          <button
+                            className="doneBtn"
+                            onClick={() => {
+                              updateTodo(val.id);
+                            }}
+                          >
+                            Done
+                          </button>
+                          <button
+                            className="xBtn"
+                            onClick={() => {
+                              deleteTodo(val.id);
+                            }}
+                          >
+                            X
+                          </button>
+                        </div>
                       </div>
                     );
                   })}
@@ -151,22 +163,24 @@ function App() {
                 <div>
                   <input
                     type="text"
-                    placeholder="todo"
+                    placeholder="New to-do"
                     onChange={(event) => {
                       setTodo(event.target.value);
                     }}
                   />
                   <button
+                    className="addBtn"
                     onClick={() => {
                       createTodo(val.id);
                     }}
                   >
-                    Add todo
+                    Add
                   </button>
                 </div>
 
                 <div className="deleteList">
                   <button
+                    className="deleteBtn"
                     onClick={() => {
                       deleteList(val.id);
                     }}

@@ -20,7 +20,7 @@
 /*Sign in section*/
 .signIn {
   background-color: var(--main);
-  padding: 1%;
+  text-align: center;
 }
 /*Create a list*/
 .main {
@@ -32,10 +32,12 @@
   text-align: center;
 }
 .myLists {
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
+  padding: 1%;
   background-color: var(--light);
   border: 2px solid var(--hl1);
+  border-radius: 3px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -45,33 +47,91 @@
 .list {
   background-color: var(--hl3);
   width: 40%;
-  margin: 5px;
+  margin: 1%;
+  border: 2px solid var(--dark);
+  border-radius: 3px;
 }
 .listTitle {
   background-color: var(--hl1);
+  border-radius: 3px;
   color: var(--dark);
   font-size: 0.8rem;
+  padding: 2%;
 }
-/* .deleteList {
-  background-color: pink;
-} */
-.deleteList button {
-  background-color: red;
+.newTitleInput {
+  width: 70%;
+  margin-top: 1%;
 }
-
+.deleteList {
+  background-color: var(--hl3);
+}
+/*To-dos*/
+.addTodo {
+  /* background-color: blue; */
+}
+.todo {
+  width: 90%;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--main);
+  display: flex;
+  justify-content: space-between;
+}
+.todo p {
+  text-align: left;
+  font-size: 0.9rem;
+}
 /*Input*/
 input {
-  padding: 0.4%;
+  padding: 0.5%;
+  border: 1.5px solid var(--dark);
+  border-radius: 3px;
 }
 /*Buttons*/
 button {
   background-color: var(--hl1);
-  border: 2px solid var(--dark);
-  padding: 0.4%;
+  border: 1.5px solid var(--dark);
+  border-radius: 3px;
+  padding: 0.5%;
   margin: 0.3%;
 }
 button:hover {
   cursor: pointer;
   background-color: transparent;
-  border: 2px solid var(--light);
+  color: var(--light);
+  border: 1.5px solid var(--light);
+}
+.renameBtn {
+  margin-top: 2%;
+  width: 25%;
+}
+.addBtn {
+  background-color: #76ba1b;
+  margin: 2% 0 1% 0;
+}
+.allTodosBtn {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 1%;
+  background-color: var(--main);
+}
+.todoBtns {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1%;
+}
+.doneBtn,
+.xBtn {
+  display: flex;
+  background-color: transparent;
+  padding: 1.5%;
+}
+.xBtn {
+  margin-left: 5%;
+}
+.deleteBtn {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 0.5%;
+  background-color: #d21f3c;
 }
