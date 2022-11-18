@@ -37,4 +37,29 @@ app.get('/lists', (req, res) => {
   });
 });
 
+//Create to-do
+// app.post('/todo', (req, res) => {
+//   const id = req.body.id;
+//   const todo = req.body.todo;
+
+//   db.query(`INSERT INTO todos (todo) VALUES(?,?)`, [todo, id], (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send('To-do inserted');
+//     }
+//   });
+// });
+
+//Display todos
+// app.get('/todos', (req, res) => {
+//   db.query('SELECT * FROM todos', (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
+
 app.listen(3001, () => console.log('Your server is running on port 3001'));
