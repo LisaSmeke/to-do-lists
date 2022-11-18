@@ -84,6 +84,17 @@ app.delete('/delete/:id', (req, res) => {
   });
 });
 
+app.delete('/deletetodo/:id', (req, res) => {
+  const id = req.params.id;
+  db.query('DELETE FROM todos WHERE id = ?', id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 //Create to-do
 // app.post('/todo', (req, res) => {
 //   const id = req.body.id;

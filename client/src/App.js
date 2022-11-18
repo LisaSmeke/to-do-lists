@@ -56,6 +56,16 @@ function App() {
     });
   };
 
+  const deleteTodo = (id) => {
+    Axios.delete(`http://localhost:3001/deletetodo/${id}`).then((response) => {
+      setMyTodos(
+        myTodos.filter((val) => {
+          return val.id != id;
+        }),
+      );
+    });
+  };
+
   return (
     <div className="App">
       <div className="signIn">
@@ -115,6 +125,22 @@ function App() {
                   >
                     Add todo
                   </button>
+                  <button onClick={getTodos}>Show todos</button>
+                  {myTodos.map((val, key) => {
+                    return (
+                      <div>
+                        {' '}
+                        <p>{val.todo}</p>
+                        <button
+                          onClick={() => {
+                            deleteTodo(val.id);
+                          }}
+                        >
+                          X
+                        </button>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <div className="deleteList">
