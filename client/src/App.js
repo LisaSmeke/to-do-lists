@@ -24,21 +24,23 @@ function App() {
     });
   };
 
-  const updateListTitle = (id) => {
-    Axios.put('http://localhost:3001/update', { title: newTitle, id: id }).then((response) => {
-      setMyLists(
-        myLists.map((val) => {
-          return val.id == id ? { id: val.id, title: newTitle } : val;
-        }),
-      );
-    });
+  const updateListTitle = (list_id) => {
+    Axios.put('http://localhost:3001/update', { title: newTitle, list_id: list_id }).then(
+      (response) => {
+        setMyLists(
+          myLists.map((val) => {
+            return val.list_id == list_id ? { list_id: val.list_id, title: newTitle } : val;
+          }),
+        );
+      },
+    );
   };
 
-  const deleteList = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
+  const deleteList = (list_id) => {
+    Axios.delete(`http://localhost:3001/delete/${list_id}`).then((response) => {
       setMyLists(
         myLists.filter((val) => {
-          return val.id != id;
+          return val.list_id != list_id;
         }),
       );
     });
@@ -58,22 +60,24 @@ function App() {
     });
   };
 
-  const updateTodo = (id) => {
-    Axios.put('http://localhost:3001/updatetodo', { done: true, id: id }).then((response) => {
-      setMyTodos(
-        myTodos.map((val) => {
-          console.log('task done');
-          return val.id == id ? { id: val.id, done: true } : val;
-        }),
-      );
-    });
+  const updateTodo = (todo_id) => {
+    Axios.put('http://localhost:3001/updatetodo', { done: true, todo_id: todo_id }).then(
+      (response) => {
+        setMyTodos(
+          myTodos.map((val) => {
+            console.log('task done');
+            return val.todo_id == todo_id ? { todo_id: val.todo_id, done: true } : val;
+          }),
+        );
+      },
+    );
   };
 
-  const deleteTodo = (id) => {
-    Axios.delete(`http://localhost:3001/deletetodo/${id}`).then((response) => {
+  const deleteTodo = (todo_id) => {
+    Axios.delete(`http://localhost:3001/deletetodo/${todo_id}`).then((response) => {
       setMyTodos(
         myTodos.filter((val) => {
-          return val.id != id;
+          return val.todo_id != todo_id;
         }),
       );
     });
@@ -120,7 +124,7 @@ function App() {
                   <button
                     className="renameBtn"
                     onClick={() => {
-                      updateListTitle(val.id);
+                      updateListTitle(val.list_id);
                     }}
                   >
                     Rename
@@ -141,7 +145,7 @@ function App() {
                           <button
                             className="doneBtn"
                             onClick={() => {
-                              updateTodo(val.id);
+                              updateTodo(val.todo_id);
                             }}
                           >
                             Done
@@ -149,7 +153,7 @@ function App() {
                           <button
                             className="xBtn"
                             onClick={() => {
-                              deleteTodo(val.id);
+                              deleteTodo(val.todo_id);
                             }}
                           >
                             X
@@ -182,7 +186,7 @@ function App() {
                   <button
                     className="deleteBtn"
                     onClick={() => {
-                      deleteList(val.id);
+                      deleteList(val.list_id);
                     }}
                   >
                     Delete list

@@ -39,9 +39,9 @@ app.get('/lists', (req, res) => {
 
 //Update list title
 app.put('/update', (req, res) => {
-  const id = req.body.id;
+  const id = req.body.list_id;
   const title = req.body.title;
-  db.query('UPDATE lists SET title = ? WHERE id = ?', [title, id], (err, result) => {
+  db.query('UPDATE lists SET title = ? WHERE list_id = ?', [title, id], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -51,9 +51,9 @@ app.put('/update', (req, res) => {
 });
 
 //Delete list
-app.delete('/delete/:id', (req, res) => {
-  const id = req.params.id;
-  db.query('DELETE FROM lists WHERE id = ?', id, (err, result) => {
+app.delete('/delete/:list_id', (req, res) => {
+  const list_id = req.params.list_id;
+  db.query('DELETE FROM lists WHERE list_id = ?', list_id, (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -88,21 +88,21 @@ app.get('/todos', (req, res) => {
 });
 
 //Display done to-dos
-app.get('/donetodos', (req, res) => {
-  db.query('SELECT todo FROM todos WHERE done = 1', (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
+// app.get('/donetodos', (req, res) => {
+//   db.query('SELECT todo FROM todos WHERE done = 1', (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
 
 //Update a to-do
 app.put('/updatetodo', (req, res) => {
-  const id = req.body.id;
+  const id = req.body.todo_id;
   const done = req.body.done;
-  db.query('UPDATE todos SET done = ? WHERE id = ?', [done, id], (err, result) => {
+  db.query('UPDATE todos SET done = ? WHERE todo_id = ?', [done, id], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -112,9 +112,9 @@ app.put('/updatetodo', (req, res) => {
 });
 
 //Delete a to-do
-app.delete('/deletetodo/:id', (req, res) => {
-  const id = req.params.id;
-  db.query('DELETE FROM todos WHERE id = ?', id, (err, result) => {
+app.delete('/deletetodo/:todo_id', (req, res) => {
+  const todo_id = req.params.todo_id;
+  db.query('DELETE FROM todos WHERE todo_id = ?', todo_id, (err, result) => {
     if (err) {
       console.log(err);
     } else {
