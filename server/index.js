@@ -67,7 +67,7 @@ app.post('/createtodo', (req, res) => {
   const todo = req.body.todo;
   const done = req.body.done;
 
-  db.query('INSERT INTO todos (todo, done) VALUES(?,?)', [todo, done], (err, result) => {
+  db.query(`INSERT INTO todos (todo, done) VALUES(?,?)`, [todo, done], (err, result) => {
     if (err) {
       console.log(err);
     } else {
